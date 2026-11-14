@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>POO - Documento de Entrega - Esconde-Esconde</title>
+<style>
+  @page { size: A4; margin: 16mm 16mm 18mm 16mm;
+    @bottom-right { content: counter(page); font: 9pt "Segoe UI", sans-serif; color: #8a7a70; } }
+  @page capa { margin: 0; @bottom-right { content: none; } }
+  @page paisagem { size: A4 landscape; margin: 10mm 10mm 12mm 10mm; }
+
+  :root { --marrom: #3b2a26; --marrom2: #6b4a3a; --laranja: #e8743b; --creme: #f4e4c6; --creme2: #fff8ec;
+          --azul: #4f6c9e; --vermelho: #c8553d; --verde: #5f8f4c; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; font: 10.5pt/1.5 "Segoe UI", Arial, sans-serif; color: #2b211e; }
+
+  h1, h2, h3 { color: var(--marrom); line-height: 1.2; break-after: avoid; }
+  h1 { font-size: 22pt; margin: 0 0 4mm; padding-bottom: 2mm; border-bottom: 3px solid var(--laranja); }
+  h2 { font-size: 14pt; margin: 6mm 0 2mm; }
+  h3 { font-size: 11.5pt; margin: 4mm 0 1.5mm; color: var(--marrom2); }
+  p { margin: 0 0 2.5mm; }
+  ul { margin: 0 0 3mm; padding-left: 5mm; }
+  li { margin-bottom: 1mm; }
+  code { font: 9pt Consolas, monospace; background: #f3ece2; padding: 0 1.2mm; border-radius: 1mm; }
+  b { color: var(--marrom); }
+
+  .secao { break-before: page; }
+  .num { color: var(--laranja); margin-right: 2mm; }
+
+  figure { margin: 3mm 0 4mm; break-inside: avoid; }
+  figure img { width: 100%; display: block; border-radius: 2mm; border: 1px solid #d9cbb6; }
+  figcaption { font-size: 8.5pt; color: #7a6a60; margin-top: 1.2mm; text-align: center; }
+  .duas { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+  .tres { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; }
+  .duas figure, .tres figure { margin: 0 0 3mm; }
+
+  table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 9pt; break-inside: auto; }
+  th { background: var(--marrom); color: #fff; text-align: left; padding: 1.6mm 2mm; font-weight: 600; }
+  td { padding: 1.4mm 2mm; border-bottom: 1px solid #e6dccd; vertical-align: top; }
+  tr { break-inside: avoid; }
+  tr:nth-child(even) td { background: #fbf6ee; }
+  td.n { text-align: center; white-space: nowrap; font-weight: 600; color: var(--marrom); }
+  table.compacta { font-size: 8.6pt; }
+  table.compacta td { padding: 0.8mm 2mm; }
+  table.compacta th { padding: 1.2mm 2mm; }
+
+  .caixa { background: var(--creme2); border: 1px solid #e8d8bd; border-left: 4px solid var(--laranja);
+           border-radius: 2mm; padding: 3mm 4mm; margin: 3mm 0 4mm; break-inside: avoid; }
+  .caixa p:last-child, .caixa ul:last-child { margin-bottom: 0; }
+  .fase { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; align-items: start; }
+  .tag { display: inline-block; font-size: 8pt; font-weight: 700; color: #fff; padding: 0.4mm 2mm; border-radius: 3mm; }
+  .tag.azul { background: var(--azul); } .tag.vermelho { background: var(--vermelho); }
+
+  /* ------------ capa ------------ */
+  .capa { page: capa; height: 297mm; position: relative; overflow: hidden;
+          background: linear-gradient(160deg, #3b2a26 0%, #5a3b30 55%, #8a4b32 100%); color: var(--creme); }
+  .capa .topo { padding: 26mm 20mm 0; }
+  .capa .disc { font-size: 13pt; letter-spacing: 2px; text-transform: uppercase; color: #f2c14e; font-weight: 700; }
+  .capa h1 { color: #fff; border: 0; font-size: 34pt; margin: 2mm 0 10mm; padding: 0; }
+  .capa .logo { width: 150mm; display: block; margin: 0 auto 4mm; }
+  .capa .sub { text-align: center; font-size: 13pt; color: var(--creme); margin-bottom: 10mm; }
+  .capa .hero { width: 170mm; margin: 0 auto; display: block; border-radius: 3mm; border: 2mm solid #f4e4c6;
+                box-shadow: 0 4mm 10mm rgba(0,0,0,.45); }
+  .capa .rodape { position: absolute; left: 20mm; right: 20mm; bottom: 16mm; font-size: 11pt; line-height: 1.6;
+                  border-top: 1px solid rgba(244,228,198,.35); padding-top: 4mm; display: flex; justify-content: space-between; }
+  .capa .rodape b { color: #fff; }
+
+  /* ------------ UML em paisagem ------------ */
+  .uml { page: paisagem; break-before: page; }
+  .uml h1 { font-size: 16pt; margin-bottom: 2mm; }
+  .uml img { width: 100%; max-height: 172mm; object-fit: contain; display: block; }
+
+  .versao img { border: 0; }
+  .comando { font: 9.5pt Consolas, monospace; background: #241c1a; color: #e9e2d6; padding: 3mm 4mm; border-radius: 2mm; margin: 2mm 0 4mm; white-space: pre; }
+</style>
+</head>
+<body>
+
+<!-- ============================== CAPA ============================== -->
+<section class="capa">
+  <div class="topo">
+    <div class="disc">Programação Orientada a Objetos</div>
+    <h1>Documento de Entrega</h1>
+    <img class="logo" src="img/titulo.png" alt="Esconde-Esconde">
+    <div class="sub">Jogo 2D de esconde-esconde desenvolvido na Unity 6 (C#)</div>
+    <img class="hero" src="img/busca.jpg" alt="Fase de busca">
+  </div>
+  <div class="rodape">
+    <div>Projeto Final de POO<br>Prof. Dr. Dani Juliano Czelusniak</div>
+    <div style="text-align:right">Repositório: <b>github.com/chicodamassa/EscondeEsconde</b><br>2026</div>
+  </div>
+</section>
+
+<!-- ============================== 1. BRIEFING ============================== -->
+<section class="secao">
+  <h1><span class="num">1</span>Briefing do Jogo</h1>
+
+  <h2>Overview geral</h2>
+  <p>Um jogo 2D de esconde-esconde onde o jogador tem um tempo limitado para se esconder dentro de uma casa
+  antes que o <b>Procurador</b> comece a procurá-lo. A casa tem cinco cômodos (Entrada, Sala, Cozinha, Quarto e
+  Banheiro) e cada um tem três esconderijos fixos, totalizando quinze lugares possíveis.</p>
+
+  <h2>Funcionamento do jogo</h2>
+  <p>O jogo possui duas fases: uma para o jogador se esconder e outra para o procurador procurá-lo.</p>
+
+  <h3><span class="tag azul">FASE 1</span>&nbsp; Fase de Preparação — visão 2D lateral</h3>
+  <div class="fase">
+    <div>
+      <ul>
+        <li>O jogo inicia junto com um temporizador: 45 s no Fácil, 30 s no Normal e 20 s no Difícil.</li>
+        <li>O jogador começa na <b>Entrada</b>, vendo o cômodo de lado. Pelas setas (ou ← →) ele anda pelos
+            outros cômodos; um mini-mapa mostra onde ele está.</li>
+        <li>Ao clicar em um móvel aparece uma janela com o nome do esconderijo, uma descrição, o <b>nível de risco</b>
+            e dois botões: <b>Esconder</b> e <b>Cancelar</b>.</li>
+        <li>Depois de escondido aparecem os botões <b>Acelerar o tempo</b> (vai direto para a busca) e
+            <b>Sair do esconderijo</b> (para trocar de lugar enquanto ainda há tempo).</li>
+        <li>Se o tempo acabar e o jogador <b>não</b> estiver escondido, ele perde.</li>
+      </ul>
+    </div>
+    <div>
+      <figure><img src="img/esconder.jpg"><figcaption>Entrada: setas, relógio, mini-mapa e esconderijos</figcaption></figure>
+      <figure><img src="img/dialogo.jpg"><figcaption>Confirmação do esconderijo com o nível de risco</figcaption></figure>
+    </div>
+  </div>
+
+</section>
+
+<section class="secao">
+  <h3 style="margin-top:0"><span class="tag vermelho">FASE 2</span>&nbsp; Fase de Busca — visão 2D de cima (planta da casa)</h3>
+  <div class="fase">
+    <div>
+      <ul>
+        <li>O jogador não pode mais agir e passa a observar a planta da casa.</li>
+        <li>O Procurador começa pela Entrada e depois sorteia os outros cômodos. Em cada cômodo ele passa por
+            todos os esconderijos, em ordem embaralhada.</li>
+        <li>Em cada esconderijo ele <b>sorteia</b> se vai revistar. Quanto menos evidente o esconderijo, menor a
+            chance (ex.: <i>debaixo da cama</i> 80%, <i>dentro do sofá</i> 25%).</li>
+        <li>O painel lateral mostra a chance, o número sorteado e um diário da busca.</li>
+        <li>Se ele revistar o esconderijo do jogador, o jogador <b>perde</b>. Se passar direto e terminar a casa,
+            o jogador <b>vence</b>.</li>
+      </ul>
+    </div>
+    <figure><img src="img/te_achei.jpg"><figcaption>O procurador revistou o esconderijo do jogador</figcaption></figure>
+  </div>
+
+  <h2>Objetivo do jogador</h2>
+  <p>Escolher um esconderijo pouco óbvio antes de o tempo acabar e torcer para o Procurador não revistá-lo.
+  Como o procurador tem <b>memória</b> (+15% de chance nos lugares onde já encontrou o jogador), repetir sempre
+  o mesmo esconderijo fica cada vez mais arriscado.</p>
+
+  <h2>Mecânicas principais</h2>
+  <table>
+    <tr><th style="width:34%">Mecânica</th><th>Onde está no código</th></tr>
+    <tr><td>Temporizador da preparação</td><td><code>GerenciadorJogo.AtualizarTempoPreparacao(float)</code></td></tr>
+    <tr><td>Andar entre cômodos</td><td><code>GerenciadorJogo.MoverJogadorPara(string)</code> → <code>Jogador.MoverParaComodo(Comodo)</code></td></tr>
+    <tr><td>Selecionar / confirmar / sair do esconderijo</td><td><code>Jogador.SelecionarEsconderijo</code>, <code>ConfirmarEsconderijo</code>, <code>SairDoEsconderijo</code></td></tr>
+    <tr><td>Acelerar o tempo</td><td><code>GerenciadorJogo.PularPreparacao()</code></td></tr>
+    <tr><td>Sorteio da investigação</td><td><code>Procurador.CalcularChance(Esconderijo)</code> + <code>InvestigarEsconderijo(Esconderijo, bool)</code></td></tr>
+    <tr><td>Memória do procurador</td><td><code>Procurador.Lembrar(string)</code> / <code>VezesQueEncontrouEm(string)</code> (Dictionary)</td></tr>
+    <tr><td>Dificuldade</td><td><code>GerenciadorJogo.ObterParametros(Dificuldade)</code></td></tr>
+  </table>
+</section>
+
+<!-- ============================== 2. UML ============================== -->
+<section class="uml">
+  <h1><span class="num">2</span>Diagrama de Classes (UML)</h1>
+  <img src="img/uml.png" alt="Diagrama de classes">
+</section>
+
+<section class="secao">
+  <h2 style="margin-top:0">Arquitetura</h2>
+  <p>O código foi dividido em duas camadas:</p>
+  <ul>
+    <li><b>Modelo</b> (<code>Assets/Scripts/Modelo</code>): classes C# puras, com as regras do jogo. São as classes
+        do diagrama acima e não dependem de nada visual.</li>
+    <li><b>Interface</b> (<code>Assets/Scripts/Interface</code>): componentes da Unity (MonoBehaviour) que desenham as
+        telas, tocam os sons e repassam os cliques para o modelo. O modelo avisa a interface por <b>eventos</b>
+        (<code>event Action&lt;...&gt;</code>), então ele não conhece a interface.</li>
+  </ul>
+
+  <h2>Herança</h2>
+  <div class="caixa">
+    <p><b>Personagem</b> é a <b>classe mãe abstrata</b>; <b>Jogador</b> e <b>Procurador</b> são as <b>classes filhas</b>.</p>
+    <ul>
+      <li>As filhas chamam o construtor da mãe com <code>base(nome, velocidade, cor)</code>.</li>
+      <li>Herdam <code>nome</code>, <code>velocidade</code>, <code>cor</code>, <code>ativo</code>, <code>posicao</code>,
+          <code>comodoAtual</code> e os métodos <code>Ativar()</code>, <code>Desativar()</code>, <code>MoverEmDirecao(...)</code>.</li>
+      <li>Os métodos abstratos <code>ObterFala(string)</code> e <code>Descrever()</code> são sobrescritos (<code>override</code>)
+          em cada filha: o jogador fala "Shhh... ninguém vai me achar aqui!", o procurador fala "TE ACHEI!!" (<b>polimorfismo</b>).</li>
+      <li>Na interface também há herança: <code>Tela</code> (abstrata) → <code>TelaMenu</code>, <code>TelaEsconder</code>,
+          <code>TelaProcura</code>, <code>TelaResultado</code>.</li>
+    </ul>
+  </div>
+
+  <h2>Uso de dicionários</h2>
+  <table>
+    <tr><th style="width:52%">Dicionário</th><th>Para que serve</th></tr>
+    <tr><td><code>GerenciadorJogo.comodos : Dictionary&lt;string, Comodo&gt;</code></td><td>todos os cômodos da casa, acessados pela chave (<code>"entrada"</code>, <code>"sala"</code>...)</td></tr>
+    <tr><td><code>Jogador.historicoEsconderijos : Dictionary&lt;string, int&gt;</code></td><td>quantas vezes o jogador usou cada esconderijo</td></tr>
+    <tr><td><code>Procurador.memoria : Dictionary&lt;string, int&gt;</code></td><td>onde o procurador já encontrou o jogador (aumenta a chance)</td></tr>
+    <tr><td><code>Procurador.registroInvestigacoes : Dictionary&lt;string, ResultadoInvestigacao&gt;</code></td><td>o resultado de cada esconderijo na busca atual</td></tr>
+  </table>
+
+  <h2>Requisitos técnicos × código</h2>
+  <table>
+    <tr><th style="width:15%">Classe concreta</th><th style="width:12%">Atributos</th><th style="width:28%">Obrigatórios (construtor)</th><th>Métodos com parâmetros</th></tr>
+    <tr><td><b>Jogador</b></td><td class="n">17<br><small>11 + 6 herdados</small></td><td>nome, velocidade, cor, comodoInicial, icone (<b>5</b>)</td><td>MoverParaComodo, SelecionarEsconderijo, ConfirmarEsconderijo, AtualizarTempoEscondido, MarcarCapturado, RegistrarUsoEsconderijo, VezesQueUsou, ReiniciarParaNovaPartida, ObterFala (<b>9</b>)</td></tr>
+    <tr><td><b>Procurador</b></td><td class="n">27<br><small>21 + 6 herdados</small></td><td>nome, velocidade, cor, tempoInvestigacao, bonusPercepcao, posicaoInicial (<b>6</b>)</td><td>ConfigurarDificuldade, DefinirTempoInvestigacao, ReceberComodos, EmbaralharEsconderijos, CalcularChance, InvestigarEsconderijo, AtualizarTempoInvestigacao, Lembrar, VezesQueEncontrouEm, IniciarBusca, Atualizar, ObterFala (<b>12</b>)</td></tr>
+    <tr><td><b>Comodo</b></td><td class="n">12</td><td>id, nome, imagemLateral, areaPlanta, pontoPorta, pontoCorredor (<b>6</b>)</td><td>AdicionarEsconderijo, RemoverEsconderijo, ObterEsconderijo, DefinirInvestigado, DefinirDescricao, DefinirCorDestaque, RegistrarVisita, ContemPonto (<b>8</b>)</td></tr>
+    <tr><td><b>Esconderijo</b></td><td class="n">12</td><td>id, nome, chanceInvestigacao, areaLateral, posicaoPlanta (<b>5</b>)</td><td>DefinirChanceInvestigacao, DefinirDescricao, DefinirComodo, MarcarComoInvestigado, Ocupar, ObterNivelRisco (<b>6</b>)</td></tr>
+    <tr><td><b>GerenciadorJogo</b></td><td class="n">17</td><td>comodos, ordemComodos, chaveComodoInicial, tempoPreparacao, dificuldade (<b>5</b>)</td><td>ConfigurarDificuldade, IniciarPartida, ObterComodo, ObterComodoVizinho, MoverJogadorPara, EsconderJogador, AtualizarTempoPreparacao, Atualizar, DefinirMultiplicadorVelocidade, FimDeJogoDerrota (<b>10</b>)</td></tr>
+  </table>
+  <p>Os construtores <b>validam</b> os atributos obrigatórios e lançam <code>ArgumentException</code> se vierem vazios ou inválidos.</p>
+
+  <h2>Relacionamentos</h2>
+  <ul>
+    <li><code>GerenciadorJogo</code> → 1 <code>Jogador</code> e 1 <code>Procurador</code> (associação).</li>
+    <li><code>GerenciadorJogo</code> ◆→ vários <code>Comodo</code> (composição, guardados no dicionário).</li>
+    <li><code>Comodo</code> ◆→ vários <code>Esconderijo</code> (composição; 3 por cômodo). <code>Esconderijo.ocupante</code> → <code>Jogador</code> (0..1).</li>
+    <li><code>MontadorCasa</code> (classe estática, "fábrica") cria os 5 cômodos e os 15 esconderijos.</li>
+  </ul>
+</section>
+
+<!-- ============================== 3. ELEMENTOS ADICIONAIS ============================== -->
+<section class="secao">
+  <h1><span class="num">3</span>Elementos Adicionais</h1>
+
+  <h2>Sketches</h2>
+  <p>Idealização inicial do funcionamento do jogo, com o cenário, suas divisões e os esconderijos com suas
+  chances de investigação:</p>
+  <figure style="width:75%; margin-left:auto; margin-right:auto"><img src="img/sketch_equipe.png"><figcaption>Sketch inicial da equipe</figcaption></figure>
+  <p>Rascunho inicial do UML, que serviu de base para o diagrama final (o final ganhou mais atributos e métodos para
+  atender aos requisitos e às mecânicas novas, como dificuldade e memória do procurador):</p>
+  <figure><img src="img/uml_provisorio.jpg"><figcaption>Rascunho inicial do diagrama de classes</figcaption></figure>
+</section>
+
+<section class="secao">
+  <h2 style="margin-top:0">Artes</h2>
+  <p>Cenários desenhados pela equipe: os cinco cômodos em visão lateral (fase de esconder) e a planta da casa vista de
+  cima (fase de busca).</p>
+  <figure><img src="img/comodos.jpg"><figcaption>Cômodos e planta da casa</figcaption></figure>
+  <p>Personagens, ícones e logo criados para o jogo, no mesmo estilo (contorno marrom e cores quentes):</p>
+  <figure><img src="img/personagens.png"><figcaption>Jogador, Procurador (de frente e visto de cima), ícones e logo</figcaption></figure>
+
+  <h2>Música e efeitos sonoros</h2>
+  <p>Todo o áudio é gerado por código (<code>SomJogo.cs</code>), sem arquivos externos: uma trilha de suspense em
+  lá menor em loop (baixo "pé ante pé" e melodia), tique-taque nos últimos 10 segundos, batida de coração quando o
+  procurador chega no esconderijo do jogador, som de porta ao trocar de cômodo e jingles de vitória e derrota.</p>
+</section>
+
+<section class="secao">
+  <h2 style="margin-top:0">Telas do jogo</h2>
+  <div class="tres">
+    <figure><img src="img/menu.jpg"><figcaption>Menu: nome, dificuldade, como jogar</figcaption></figure>
+    <figure><img src="img/areas.jpg"><figcaption>Áreas dos esconderijos (tecla F1)</figcaption></figure>
+    <figure><img src="img/escondido.jpg"><figcaption>Escondido: acelerar ou sair</figcaption></figure>
+    <figure><img src="img/busca.jpg"><figcaption>Busca: chance, sorteio e diário</figcaption></figure>
+    <figure><img src="img/vitoria.jpg"><figcaption>Vitória com o resumo da partida</figcaption></figure>
+    <figure><img src="img/derrota.jpg"><figcaption>Derrota</figcaption></figure>
+  </div>
+
+  <h2>Esconderijos e chances</h2>
+  <table class="compacta">
+    <tr><th>Esconderijo</th><th>Cômodo</th><th style="width:22%">Chance base de ser revistado</th></tr>
+    <tr><td>Dentro do armário de sapatos</td><td>Entrada</td><td class="n">50%</td></tr>
+    <tr><td>Debaixo do banco</td><td>Entrada</td><td class="n">70%</td></tr>
+    <tr><td>Atrás da planta grande</td><td>Entrada</td><td class="n">35%</td></tr>
+    <tr><td>Atrás da cortina</td><td>Sala</td><td class="n">60%</td></tr>
+    <tr><td>Dentro do móvel da televisão</td><td>Sala</td><td class="n">40%</td></tr>
+    <tr><td>Dentro do sofá</td><td>Sala</td><td class="n">25%</td></tr>
+    <tr><td>Dentro do armário inferior</td><td>Cozinha</td><td class="n">45%</td></tr>
+    <tr><td>Debaixo da mesa</td><td>Cozinha</td><td class="n">75%</td></tr>
+    <tr><td>Dentro da despensa</td><td>Cozinha</td><td class="n">35%</td></tr>
+    <tr><td>Debaixo da cama</td><td>Quarto</td><td class="n">80%</td></tr>
+    <tr><td>Dentro do guarda-roupa</td><td>Quarto</td><td class="n">55%</td></tr>
+    <tr><td>Dentro do baú</td><td>Quarto</td><td class="n">30%</td></tr>
+    <tr><td>Dentro do armário da pia</td><td>Banheiro</td><td class="n">50%</td></tr>
+    <tr><td>Atrás da porta</td><td>Banheiro</td><td class="n">40%</td></tr>
+    <tr><td>Atrás da cortina do box</td><td>Banheiro</td><td class="n">65%</td></tr>
+  </table>
+  <p>Dificuldade: Fácil = −10% em todas as chances, Normal = +0%, Difícil = +12%. Memória: +15% em cada lugar onde o
+  procurador já encontrou o jogador.</p>
+</section>
+
+<!-- ============================== 4. VERSIONAMENTO ============================== -->
+<section class="secao versao">
+  <h1><span class="num">4</span>Versionamento</h1>
+  <p>O projeto é versionado com <b>Git</b> e hospedado no <b>GitHub</b> (<code>github.com/chicodamassa/EscondeEsconde</code>,
+  branch <code>main</code>). Cada etapa do desenvolvimento virou um commit: <code>git add</code> dos arquivos daquela
+  etapa, <code>git commit</code> com uma mensagem explicando a mudança e, no fim, <code>git push</code> para o GitHub.
+  O <code>.gitignore</code> deixa de fora as pastas que a Unity recria sozinha (<code>Library</code>, <code>Temp</code>,
+  <code>Logs</code>) e o executável (<code>Build</code>).</p>
+  <figure style="width:90%; margin-left:auto; margin-right:auto"><img src="img/versionamento.png"><figcaption>Histórico de commits do repositório</figcaption></figure>
+
+  <table class="compacta">
+    <tr><th style="width:5%">#</th><th style="width:45%">Commit</th><th>O que foi feito</th></tr>
+    <tr><td class="n">1</td><td>Cria projeto Unity 6 com pacote de UI e .gitignore</td><td>estrutura inicial e configurações</td></tr>
+    <tr><td class="n">2</td><td>Adiciona artes dos cômodos e planta da casa</td><td>artes da equipe + importador automático de sprites</td></tr>
+    <tr><td class="n">3</td><td>Adiciona personagens, ícones e logo do jogo</td><td>retratos, procurador visto de cima, ícones e logo</td></tr>
+    <tr><td class="n">4</td><td>Modelo: enumerações e classe abstrata Personagem</td><td>classe mãe da herança</td></tr>
+    <tr><td class="n">5</td><td>Modelo: classes Esconderijo e Comodo</td><td>composição Comodo → Esconderijos</td></tr>
+    <tr><td class="n">6</td><td>Modelo: classe Jogador herdando de Personagem</td><td>primeira classe filha</td></tr>
+    <tr><td class="n">7</td><td>Modelo: classe Procurador com sorteio e memória</td><td>segunda classe filha, máquina de estados e dicionários</td></tr>
+    <tr><td class="n">8</td><td>Modelo: GerenciadorJogo e MontadorCasa</td><td>regras da partida e dicionário de cômodos</td></tr>
+    <tr><td class="n">9</td><td>Interface: base das telas, menu inicial e transições</td><td>classe abstrata Tela e menu</td></tr>
+    <tr><td class="n">10</td><td>Interface: fase de esconder em visão lateral</td><td>áreas clicáveis, relógio, setas, mini-mapa</td></tr>
+    <tr><td class="n">11</td><td>Interface: fase de busca na planta e tela de resultado</td><td>procurador andando, sorteio, diário, resultado</td></tr>
+    <tr><td class="n">12</td><td>Adiciona controlador principal, sons e música</td><td>ligação modelo ↔ telas e áudio por código</td></tr>
+    <tr><td class="n">13</td><td>Adiciona cena do jogo e ferramentas de build</td><td>cena Jogo.unity e geração do executável</td></tr>
+    <tr><td class="n">14</td><td>Adiciona documentação, diagrama UML e capturas de tela</td><td>documentação e imagens</td></tr>
+    <tr><td class="n">15</td><td>Adiciona print e descrição do versionamento</td><td>imagem do histórico e tabela</td></tr>
+  </table>
+</section>
+
+<!-- ============================== 5. INSTALAÇÃO ============================== -->
+<section class="secao">
+  <h1><span class="num">5</span>Instalação</h1>
+
+  <h2>Opção A — Jogar pelo executável (Windows 10/11, 64 bits)</h2>
+  <ol>
+    <li>Copie a pasta <code>Build</code> <b>inteira</b> para o computador (o <code>.exe</code> sozinho não funciona).</li>
+    <li>Dê dois cliques em <code>EscondeEsconde.exe</code>.</li>
+    <li>O jogo abre em tela cheia. <b>Alt + Enter</b> alterna para janela. Para fechar, use o botão <b>Sair</b> no menu.</li>
+  </ol>
+
+  <h2>Opção B — Abrir o código-fonte na Unity</h2>
+  <ol>
+    <li>Instale o <b>Unity Hub</b> e o editor <b>Unity 6 (6000.6.0f1)</b> com o módulo <i>Windows Build Support</i>.</li>
+    <li>Baixe o código: <b>Code → Download ZIP</b> no GitHub, ou pelo terminal:
+      <div class="comando">git clone https://github.com/chicodamassa/EscondeEsconde.git</div></li>
+    <li>No Unity Hub: <b>Add → Add project from disk</b> e selecione a pasta <code>EscondeEsconde</code>.</li>
+    <li>Abra o projeto. Na primeira vez a Unity importa tudo e pode levar alguns minutos.</li>
+    <li>A cena <code>Assets/Scenes/Jogo.unity</code> abre sozinha. Clique em <b>Play ▶</b>.</li>
+    <li>Para gerar o executável: menu <b>Esconde-Esconde → 2. Gerar executável (Windows)</b>. O jogo é criado na pasta
+        <code>Build</code>. Se a cena não abrir, use <b>Esconde-Esconde → 1. Montar cena do jogo</b>.</li>
+  </ol>
+
+  <h2>Controles</h2>
+  <table>
+    <tr><th>Ação</th><th>Mouse</th><th>Teclado</th></tr>
+    <tr><td>Trocar de cômodo</td><td>setas nas laterais da tela</td><td>← → (ou A / D)</td></tr>
+    <tr><td>Ver um esconderijo</td><td>clicar no móvel</td><td>—</td></tr>
+    <tr><td>Confirmar / cancelar</td><td>botões Esconder / Cancelar</td><td>Enter / Esc</td></tr>
+    <tr><td>Mostrar todas as áreas clicáveis</td><td>—</td><td>F1</td></tr>
+    <tr><td>Velocidade da busca</td><td>botões 1x / 2x / 4x</td><td>—</td></tr>
+  </table>
+
+  <h2>Estrutura do código-fonte</h2>
+  <table>
+    <tr><th style="width:38%">Pasta</th><th>Conteúdo</th></tr>
+    <tr><td><code>Assets/Scripts/Modelo</code></td><td>Personagem, Jogador, Procurador, Comodo, Esconderijo, GerenciadorJogo, MontadorCasa, Enumeracoes</td></tr>
+    <tr><td><code>Assets/Scripts/Interface</code></td><td>ControladorJogo, telas (Menu, Esconder, Procura, Resultado), sons e utilitários de UI</td></tr>
+    <tr><td><code>Assets/Scripts/Editor</code></td><td>importação das artes, montagem da cena e geração do executável</td></tr>
+    <tr><td><code>Assets/Resources/Arte</code></td><td>artes dos cômodos, planta, personagens e ícones</td></tr>
+    <tr><td><code>Documentacao</code></td><td>este documento, UML, capturas de tela e histórico de versões</td></tr>
+  </table>
+</section>
+
+</body>
+</html>
