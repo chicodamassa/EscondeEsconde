@@ -136,21 +136,35 @@ Dificuldade: Fácil = −10% em todas as chances, Normal = +0%, Difícil = +12%.
 
 ## 4. Versionamento
 
-*(Preencher com o print do histórico de commits — `git log --oneline` ou a página de commits do GitHub —
-com pelo menos 10 ações de add/commit/push e um texto explicando cada etapa.)*
+Imagem: `versionamento.png`.
 
-Sugestão de etapas de commit:
-1. Criação do projeto Unity e `.gitignore`
-2. Artes dos cômodos e da planta da casa
-3. Enumerações e classe abstrata `Personagem`
-4. Classes `Esconderijo` e `Comodo`
-5. Classe `Jogador`
-6. Classe `Procurador` (máquina de estados e sorteio)
-7. `GerenciadorJogo` e `MontadorCasa`
-8. Interface: menu e fase de esconder
-9. Interface: fase de busca e tela de resultado
-10. Sons, música e polimento visual
-11. Documentação, UML e executável
+O projeto é versionado com **Git** (branch `main`). Cada etapa do desenvolvimento virou um commit
+(`git add` dos arquivos daquela etapa + `git commit` com uma mensagem explicando o que mudou).
+O `.gitignore` deixa de fora as pastas que a Unity recria sozinha (`Library`, `Temp`, `Logs`) e o executável (`Build`).
+
+| # | Commit | O que foi feito |
+|---|---|---|
+| 1 | Cria projeto Unity 6 com pacote de UI e .gitignore | estrutura inicial do projeto e configurações |
+| 2 | Adiciona artes dos cômodos e planta da casa | as 5 visões laterais e a planta feitas pela equipe + importador automático de sprites |
+| 3 | Adiciona personagens, ícones e logo do jogo | retratos, procurador visto de cima, ícones e logo |
+| 4 | Modelo: enumerações e classe abstrata Personagem | classe mãe da herança |
+| 5 | Modelo: classes Esconderijo e Comodo | composição Comodo → Esconderijos |
+| 6 | Modelo: classe Jogador herdando de Personagem | primeira classe filha |
+| 7 | Modelo: classe Procurador com sorteio e memória | segunda classe filha, máquina de estados e dicionários |
+| 8 | Modelo: GerenciadorJogo e MontadorCasa | regras da partida e dicionário de cômodos |
+| 9 | Interface: base das telas, menu inicial e transições | classe abstrata Tela e menu |
+| 10 | Interface: fase de esconder em visão lateral | áreas clicáveis, relógio, setas, mini-mapa |
+| 11 | Interface: fase de busca na planta e tela de resultado | procurador andando, sorteio, diário, resultado |
+| 12 | Adiciona controlador principal, sons e música | ligação modelo ↔ telas e áudio gerado por código |
+| 13 | Adiciona cena do jogo e ferramentas de build | cena Jogo.unity e geração do executável |
+| 14 | Adiciona documentação, diagrama UML e capturas de tela | este documento e as imagens |
+| 15 | Adiciona print e descrição do versionamento | imagem do histórico e esta tabela |
+
+Para enviar ao GitHub (`push`):
+```
+git remote add origin https://github.com/<usuario>/EscondeEsconde.git
+git push -u origin main
+```
 
 ---
 
