@@ -1,0 +1,34 @@
+# Pastas geradas pela Unity (recriadas automaticamente ao abrir o projeto)
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+
+# Executável gerado (Esconde-Esconde > Gerar executável)
+/[Bb]uild/
+/[Bb]uilds/
+
+# Arquivos de IDE gerados pela Unity
+.vs/
+.vscode/
+.idea/
+*.csproj
+*.sln
+*.slnx
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
